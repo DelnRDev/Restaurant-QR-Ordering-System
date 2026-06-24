@@ -12,32 +12,38 @@ MENU = {
     "Phở Bò": {
         "price": 88,
         "desc": "Rich beef broth, rice noodles, herbs",
-        "image": "/static/photos/pho_bo.jpg"
+        "image": "/static/photos/pho_bo.jpg",
+        "category": "Phở"
     },
     "Bánh Mì": {
         "price": 45,
         "desc": "Crispy baguette with grilled meat and pickles",
-        "image": "/static/photos/banh_mi.jpeg"
+        "image": "/static/photos/banh_mi.jpeg",
+        "category": "Bánh Mì"
     },
     "Bún Thịt Nướng": {
         "price": 78,
         "desc": "Grilled pork, vermicelli, fresh vegetables",
-        "image": "/static/photos/bun_thit_nuong.jpeg"
+        "image": "/static/photos/bun_thit_nuong.jpeg",
+        "category": "Rolls"
     },
     "Gỏi Cuốn": {
         "price": 42,
         "desc": "Fresh rice paper rolls with herbs",
-        "image": "/static/photos/goi_cuon.jpg"
+        "image": "/static/photos/goi_cuon.jpg",
+        "category": "Drinks"
     },
     "Cà Phê Sữa Đá": {
         "price": 32,
         "desc": "Vietnamese iced coffee with condensed milk",
-        "image": "/static/photos/ca_phe_sua_da.jpeg"
+        "image": "/static/photos/ca_phe_sua_da.jpeg",
+        "category": "Drinks"
     },
     "Trà Đá": {
         "price": 12,
         "desc": "Vietnamese iced tea",
-        "image": "/static/photos/tra_da.jpeg"
+        "image": "/static/photos/tra_da.jpeg",
+        "category": "Phở"
     }
 }
 
@@ -111,6 +117,46 @@ body {
     opacity: 0.9;
 }
 
+.customer-tabs {
+    margin: 18px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ead8c0;
+    border-radius: 20px;
+    padding: 6px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+    position: sticky;
+    top: 10px;
+    z-index: 150;
+    backdrop-filter: blur(10px);
+}
+
+.customer-tab {
+    height: 48px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    text-decoration: none;
+    font-weight: bold;
+    color: #8a5a22;
+    background: transparent;
+}
+
+.customer-tab.active {
+    background: #2f6f3e;
+    color: white;
+    box-shadow: 0 4px 12px rgba(47,111,62,0.25);
+}
+
+.customer-tab-icon {
+    font-size: 18px;
+}
+
 .table-card {
     background: white;
     margin: 18px;
@@ -135,6 +181,23 @@ body {
     gap: 10px;
     overflow-x: auto;
     padding: 0 18px 16px;
+}
+
+.category-tab {
+    background: white;
+    color: #b45309;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 999px;
+    font-weight: bold;
+    white-space: nowrap;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    width: auto;
+}
+
+.category-tab.active {
+    background: #2f6f3e;
+    color: white;
 }
 
 .category-row span {
@@ -528,6 +591,99 @@ body {
     padding: 20px;
     color: #777;
     text-align: center;
+}
+
+.staff-table-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+}
+
+.staff-table-card {
+    background: white;
+    border-radius: 20px;
+    padding: 18px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+    border-top: 5px solid #ddd;
+}
+
+.staff-table-card h2 {
+    margin: 8px 0 4px;
+    color: #12351f;
+}
+
+.staff-table-card p {
+    margin: 6px 0;
+    color: #666;
+}
+
+.table-status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.table-status-text {
+    font-weight: bold;
+}
+
+.table-available {
+    border-top-color: #16a34a;
+}
+
+.table-available .table-icon {
+    background: #16a34a;
+}
+
+.table-available .table-status-text {
+    color: #16a34a;
+}
+
+.table-ordering {
+    border-top-color: #2563eb;
+}
+
+.table-ordering .table-icon {
+    background: #2563eb;
+}
+
+.table-ordering .table-status-text {
+    color: #2563eb;
+}
+
+.table-bill {
+    border-top-color: #ef4444;
+}
+
+.table-bill .table-icon {
+    background: #ef4444;
+}
+
+.table-bill .table-status-text {
+    color: #ef4444;
+}
+
+.table-paid {
+    border-top-color: #6b7280;
+}
+
+.table-paid .table-icon {
+    background: #6b7280;
+}
+
+.table-paid .table-status-text {
+    color: #6b7280;
 }
 
 /* Sales dashboard */
@@ -1046,7 +1202,43 @@ tr:nth-child(even) {
         font-size: 13px;
     }
     .menu-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        padding: 0 12px;
+    }
+
+    .menu-card {
+        border-radius: 16px;
+    }
+
+    .menu-img {
+        height: 115px;
+    }
+
+    .menu-info {
+        padding: 10px 10px 4px;
+    }
+
+    .menu-info h3 {
+        font-size: 16px;
+    }
+
+    .menu-info p {
+        font-size: 12px;
+        line-height: 1.3;
+    }
+
+    .menu-info strong {
+        font-size: 16px;
+    }
+
+    .menu-qty {
+        padding: 0 10px 10px;
+    }
+
+    .add-btn {
+        padding: 10px 12px;
+        font-size: 14px;
     }
 
     .cart-item {
@@ -1165,6 +1357,16 @@ def init_db():
             created_at TEXT NOT NULL
         )
     """)
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS bill_order_links (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            bill_request_id INTEGER NOT NULL,
+            order_id INTEGER NOT NULL,
+            FOREIGN KEY(bill_request_id) REFERENCES bill_requests(id),
+            FOREIGN KEY(order_id) REFERENCES orders(id)
+        )
+    """)
     
     cursor.execute("""
         UPDATE bill_requests
@@ -1208,8 +1410,9 @@ def admin():
 
         <div class="nav">
             <a href="/kitchen">Kitchen Dashboard</a>
-            <a href="/sales">Sales Dashboard</a>
             <a href="/bills">Bill Requests</a>
+            <a href="/tables">Tables Dashboard</a>
+            <a href="/sales">Sales Dashboard</a>
         </div>
     </div>
     """
@@ -1257,26 +1460,18 @@ def table_menu(table_number):
             <h2>Table {{ table_number }}</h2>
         </div>
 
-        <div class="table-card">
-            <a href="/table/{{ table_number }}" class="add-btn">
+        <div class="customer-tabs">
+            <a href="/table/{{ table_number }}" class="customer-tab active">
+                <span class="customer-tab-icon">🍜</span>
                 Menu
             </a>
 
-            <a href="/orders/{{ table_number }}" class="add-btn">
+            <a href="/orders/{{ table_number }}" class="customer-tab">
+                <span class="customer-tab-icon">🧾</span>
                 Orders
             </a>
         </div>
-
-        {% if last_order_id %}
-        <div class="table-card">
-            <p>You have an active/recent order</p>
-            <h2>Order #{{ last_order_id }}</h2>
-            <br>
-            <a href="/order/{{ last_order_id }}" class="add-btn">
-                View Current Order
-            </a>
-        </div>
-        {% endif %}
+        
 
        
         {% if active_bill %}
@@ -1292,11 +1487,12 @@ def table_menu(table_number):
 
 
         <div class="category-row">
-            <span>Phở</span>
-            <span>Bánh Mì</span>
-            <span>Bún</span>
-            <span>Rolls</span>
-            <span>Drinks</span>
+            <button type="button" class="category-tab active" onclick="filterCategory('All', this)">All</button>
+            <button type="button" class="category-tab" onclick="filterCategory('Phở', this)">Phở</button>
+            <button type="button" class="category-tab" onclick="filterCategory('Bánh Mì', this)">Bánh Mì</button>
+            <button type="button" class="category-tab" onclick="filterCategory('Bún', this)">Bún</button>
+            <button type="button" class="category-tab" onclick="filterCategory('Rolls', this)">Rolls</button>
+            <button type="button" class="category-tab" onclick="filterCategory('Drinks', this)">Drinks</button>
         </div>
 
         <form action="/submit_order" method="POST">
@@ -1305,7 +1501,7 @@ def table_menu(table_number):
             <div class="menu-grid">
 
             {% for item, info in menu.items() %}
-            <div class="menu-card">
+            <div class="menu-card" data-category="{{ info.category }}">
                 <img src="{{ info.image }}" class="menu-img">
 
                 <div class="menu-info">
@@ -1344,6 +1540,30 @@ def table_menu(table_number):
             {% endif %}
             
         </form>
+
+        <script>
+        function filterCategory(category, button) {
+            const cards = document.querySelectorAll(".menu-card");
+            const tabs = document.querySelectorAll(".category-tab");
+
+            tabs.forEach(tab => {
+                tab.classList.remove("active");
+            });
+
+            button.classList.add("active");
+
+            cards.forEach(card => {
+                const cardCategory = card.getAttribute("data-category");
+
+                if (category === "All" || cardCategory === category) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+        </script>
+
     </div>
     """
 
@@ -1368,12 +1588,23 @@ def customer_orders(table_number):
         SELECT id, table_number, status, created_at, note
         FROM orders
         WHERE table_number = ?
+        AND id NOT IN (
+            SELECT bill_order_links.order_id
+            FROM bill_order_links
+            JOIN bill_requests
+                ON bill_requests.id = bill_order_links.bill_request_id
+            WHERE bill_requests.status = 'Closed'
+        )
         ORDER BY id DESC
     """, (table_number,))
 
     orders = cursor.fetchall()
 
     order_list = []
+
+    first_unbilled_order_id = None
+    unbilled_total = 0
+    unbilled_count = 0
 
     for order in orders:
         order_id = order[0]
@@ -1386,12 +1617,15 @@ def customer_orders(table_number):
 
         items = cursor.fetchall()
 
+
         cursor.execute("""
-            SELECT id, status
+            SELECT bill_requests.id, bill_requests.status
             FROM bill_requests
-            WHERE order_id = ?
-              AND status IN ('New', 'Accepted', 'Paid')
-            ORDER BY id DESC
+            JOIN bill_order_links
+            ON bill_order_links.bill_request_id = bill_requests.id
+            WHERE bill_order_links.order_id = ?
+            AND bill_requests.status IN ('New', 'Accepted', 'Paid', 'Closed')
+            ORDER BY bill_requests.id DESC
             LIMIT 1
         """, (order_id,))
 
@@ -1403,6 +1637,13 @@ def customer_orders(table_number):
         for item in items:
             total += item[2]
             item_count += item[1]
+
+        if not bill:
+            if first_unbilled_order_id is None:
+                first_unbilled_order_id = order_id
+
+            unbilled_total += total
+            unbilled_count += 1
 
         order_list.append({
             "id": order[0],
@@ -1431,15 +1672,39 @@ def customer_orders(table_number):
 
         <div class="order-content">
 
-            <div class="table-card">
-                <a href="/table/{{ table_number }}" class="add-btn">
+            <div class="customer-tabs">
+                <a href="/table/{{ table_number }}" class="customer-tab">
+                    <span class="customer-tab-icon">🍜</span>
                     Menu
                 </a>
 
-                <a href="/orders/{{ table_number }}" class="add-btn">
+                <a href="/orders/{{ table_number }}" class="customer-tab active">
+                    <span class="customer-tab-icon">🧾</span>
                     Orders
                 </a>
             </div>
+
+            {% if first_unbilled_order_id %}
+            <div class="order-summary-card">
+                <h2>Current Table Bill</h2>
+
+                <div class="summary-row">
+                    <span>{{ unbilled_count }} unpaid orders</span>
+                    <span>HK${{ unbilled_total }}</span>
+                </div>
+
+                <div class="summary-total">
+                    <span>Total</span>
+                    <span>HK${{ unbilled_total }}</span>
+                </div>
+
+                <br>
+
+                <a href="/request_bill/{{ first_unbilled_order_id }}" class="place-btn">
+                    Request Bill for Table
+                </a>
+            </div>
+            {% endif %}
 
             {% if orders|length == 0 %}
             <div class="order-success-card">
@@ -1492,9 +1757,9 @@ def customer_orders(table_number):
                         View Bill
                     </a>
                     {% else %}
-                    <a href="/request_bill/{{ order.id }}" class="place-btn">
-                        Request Bill
-                    </a>
+                    <span class="place-btn">
+                        Unpaid
+                    </span>
                     {% endif %}
                 </div>
             </div>
@@ -1508,6 +1773,9 @@ def customer_orders(table_number):
         html,
         table_number=table_number,
         orders=order_list,
+        first_unbilled_order_id=first_unbilled_order_id,
+        unbilled_total=unbilled_total,
+        unbilled_count=unbilled_count,
         style=STYLE
     )
 
@@ -1942,7 +2210,7 @@ def sales():
     total_revenue = cursor.fetchone()[0] or 0
 
     cursor.execute("""
-        SELECT COUNT(DISTINCT order_id)
+        SELECT COUNT(id)
         FROM bill_requests
         WHERE status IN ('Paid', 'Closed')
     """)
@@ -1950,8 +2218,9 @@ def sales():
 
     cursor.execute("""
         SELECT SUM(order_items.quantity)
-        FROM order_items
-        JOIN bill_requests ON bill_requests.order_id = order_items.order_id
+        FROM bill_requests
+        JOIN bill_order_links ON bill_order_links.bill_request_id = bill_requests.id
+        JOIN order_items ON order_items.order_id = bill_order_links.order_id
         WHERE bill_requests.status IN ('Paid', 'Closed')
     """)
 
@@ -1967,8 +2236,9 @@ def sales():
             order_items.item,
             SUM(order_items.quantity) AS quantity_sold,
             SUM(order_items.total_price) AS revenue
-        FROM order_items
-        JOIN bill_requests ON bill_requests.order_id = order_items.order_id
+        FROM bill_requests
+        JOIN bill_order_links ON bill_order_links.bill_request_id = bill_requests.id
+        JOIN order_items ON order_items.order_id = bill_order_links.order_id
         WHERE bill_requests.status IN ('Paid', 'Closed')
         GROUP BY order_items.item
         ORDER BY quantity_sold DESC
@@ -1992,16 +2262,16 @@ def sales():
 
     cursor.execute("""
         SELECT 
-            orders.id,
-            orders.table_number,
+            bill_requests.id,
+            bill_requests.table_number,
             bill_requests.created_at,
-            bill_requests.total_amount AS order_total,
+            bill_requests.total_amount,
             GROUP_CONCAT(order_items.quantity || 'x ' || order_items.item, ', ') AS items
         FROM bill_requests
-        JOIN orders ON bill_requests.order_id = orders.id
-        JOIN order_items ON order_items.order_id = orders.id
+        JOIN bill_order_links ON bill_order_links.bill_request_id = bill_requests.id
+        JOIN order_items ON order_items.order_id = bill_order_links.order_id
         WHERE bill_requests.status IN ('Paid', 'Closed')
-        GROUP BY orders.id, orders.table_number, bill_requests.created_at, bill_requests.total_amount
+        GROUP BY bill_requests.id, bill_requests.table_number, bill_requests.created_at, bill_requests.total_amount
         ORDER BY bill_requests.id DESC
         LIMIT 8
     """)
@@ -2062,7 +2332,7 @@ def sales():
                     {% for order in recent_orders %}
                     <div class="recent-order">
                         <div class="recent-order-top">
-                            <span>Order #{{ order[0] }} · Table {{ order[1] }}</span>
+                            <span>Bill #{{ order[0] }} · Table {{ order[1] }}</span>
                             <span>${{ order[3] }}</span>
                         </div>
                         <p>{{ order[4] }}</p>
@@ -2349,8 +2619,8 @@ def track_order(order_id):
                     Add More Items
                 </a>
 
-                <a href="/request_bill/{{ order[0] }}" class="place-btn">
-                    Request Bill
+                <a href="/orders/{{ order[1] }}" class="place-btn">
+                    View Table Bill
                 </a>
             </div>
             {% endif %}
@@ -2534,11 +2804,7 @@ def bills():
                         <span>${{ bill.total }}</span>
                     </div>
 
-                    <form action="/reset_table/{{ bill.table_number }}" method="POST">
-                        <button class="kitchen-action served-btn" type="submit">
-                            Reset Table
-                        </button>
-                    </form>
+                    
 
                     <form action="/update_bill_status/{{ bill.id }}/Accepted" method="POST">
                         <button class="kitchen-action accept-btn" type="submit">
@@ -2616,6 +2882,14 @@ def bills():
                         <span>Total</span>
                         <span>${{ bill.total }}</span>
                     </div>
+
+                   
+
+                    <form action="/reset_table/{{ bill.table_number }}" method="POST">
+                        <button class="kitchen-action served-btn" type="submit">
+                            Reset Table
+                        </button>
+                    </form>
                 </div>
                 {% else %}
                 <div class="empty-column">No paid bills</div>
@@ -2650,7 +2924,7 @@ def update_bill_status(request_id, new_status):
     allowed_statuses = ["Accepted", "Paid"]
 
     if new_status not in allowed_statuses:
-        return redirect("/bills")
+        return redirect(request.referrer or "/tables")
 
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
@@ -2671,7 +2945,6 @@ def request_bill_page(order_id):
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
 
-   
     cursor.execute("""
         SELECT id, table_number
         FROM orders
@@ -2683,29 +2956,64 @@ def request_bill_page(order_id):
     if not order:
         conn.close()
         return "Order not found"
-    
-    active_bill = get_active_table_bill(order[1])
+
+    table_number = order[1]
+
+    active_bill = get_active_table_bill(table_number)
 
     if active_bill:
         conn.close()
         return redirect(f"/bill_requested/{active_bill[0]}")
 
     cursor.execute("""
-        SELECT item, quantity, total_price
-        FROM order_items
-        WHERE order_id = ?
-    """, (order_id,))
+        SELECT id, status, created_at, note
+        FROM orders
+        WHERE table_number = ?
+          AND id NOT IN (
+              SELECT order_id
+              FROM bill_order_links
+          )
+        ORDER BY id ASC
+    """, (table_number,))
 
-    items = cursor.fetchall()
+    table_orders = cursor.fetchall()
 
-    conn.close()
+    if len(table_orders) == 0:
+        conn.close()
+        return redirect(f"/orders/{table_number}")
 
+    order_list = []
     total_amount = 0
     item_count = 0
 
-    for item in items:
-        total_amount += item[2]
-        item_count += item[1]
+    for table_order in table_orders:
+        table_order_id = table_order[0]
+
+        cursor.execute("""
+            SELECT item, quantity, total_price
+            FROM order_items
+            WHERE order_id = ?
+        """, (table_order_id,))
+
+        items = cursor.fetchall()
+
+        order_total = 0
+
+        for item in items:
+            order_total += item[2]
+            total_amount += item[2]
+            item_count += item[1]
+
+        order_list.append({
+            "id": table_order[0],
+            "status": table_order[1],
+            "created_at": table_order[2],
+            "note": table_order[3],
+            "items": items,
+            "total": order_total
+        })
+
+    conn.close()
 
     html = """
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -2716,7 +3024,7 @@ def request_bill_page(order_id):
 
         <div class="top-hero">
             <h1>Request Bill</h1>
-            <p>Table {{ order[1] }} · Dine-in order</p>
+            <p>Table {{ table_number }} · All current orders</p>
         </div>
 
         <div class="order-content">
@@ -2725,7 +3033,7 @@ def request_bill_page(order_id):
                 <h2>Bill Summary</h2>
 
                 <div class="summary-row">
-                    <span>{{ item_count }} items</span>
+                    <span>{{ orders|length }} orders · {{ item_count }} items</span>
                     <span>HK${{ total_amount }}</span>
                 </div>
 
@@ -2735,10 +3043,29 @@ def request_bill_page(order_id):
                 </div>
             </div>
 
+            {% for order in orders %}
+            <div class="order-summary-card">
+                <div class="recent-order-top">
+                    <span>Order #{{ order.id }}</span>
+                    <span>{{ order.status }}</span>
+                </div>
+
+                {% for item in order["items"] %}
+                <div class="summary-row">
+                    <span>{{ item[1] }}x {{ item[0] }}</span>
+                    <span>HK${{ item[2] }}</span>
+                </div>
+                {% endfor %}
+
+                <div class="summary-total">
+                    <span>Order Total</span>
+                    <span>HK${{ order.total }}</span>
+                </div>
+            </div>
+            {% endfor %}
+
             <form action="/submit_bill_request" method="POST">
-                <input type="hidden" name="order_id" value="{{ order[0] }}">
-                <input type="hidden" name="table_number" value="{{ order[1] }}">
-                <input type="hidden" name="total_amount" value="{{ total_amount }}">
+                <input type="hidden" name="table_number" value="{{ table_number }}">
 
                 <div class="order-summary-card">
                     <h2>Payment Method</h2>
@@ -2800,7 +3127,7 @@ def request_bill_page(order_id):
                 </div>
 
                 <div class="order-actions">
-                    <a href="/order/{{ order[0] }}" class="order-action-btn">
+                    <a href="/orders/{{ table_number }}" class="order-action-btn">
                         Cancel
                     </a>
 
@@ -2816,18 +3143,17 @@ def request_bill_page(order_id):
 
     return render_template_string(
         html,
-        order=order,
-        items=items,
+        table_number=table_number,
+        orders=order_list,
         total_amount=total_amount,
         item_count=item_count,
         style=STYLE
     )
 
+
 @app.route("/submit_bill_request", methods=["POST"])
 def submit_bill_request():
-    order_id = int(request.form["order_id"])
     table_number = int(request.form["table_number"])
-    total_amount = float(request.form["total_amount"])
     payment_method = request.form["payment_method"]
     payment_location = request.form["payment_location"]
     note = request.form.get("note", "")
@@ -2841,7 +3167,41 @@ def submit_bill_request():
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
 
-   
+    cursor.execute("""
+        SELECT id
+        FROM orders
+        WHERE table_number = ?
+          AND id NOT IN (
+              SELECT order_id
+              FROM bill_order_links
+          )
+        ORDER BY id ASC
+    """, (table_number,))
+
+    unpaid_orders = cursor.fetchall()
+
+    if len(unpaid_orders) == 0:
+        conn.close()
+        return redirect(f"/orders/{table_number}")
+
+    order_ids = []
+
+    for order in unpaid_orders:
+        order_ids.append(order[0])
+
+    total_amount = 0
+
+    for order_id in order_ids:
+        cursor.execute("""
+            SELECT SUM(total_price)
+            FROM order_items
+            WHERE order_id = ?
+        """, (order_id,))
+
+        order_total = cursor.fetchone()[0] or 0
+        total_amount += order_total
+
+    main_order_id = order_ids[-1]
 
     cursor.execute("""
         INSERT INTO bill_requests
@@ -2849,7 +3209,7 @@ def submit_bill_request():
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         table_number,
-        order_id,
+        main_order_id,
         total_amount,
         payment_method,
         payment_location,
@@ -2859,6 +3219,13 @@ def submit_bill_request():
     ))
 
     bill_request_id = cursor.lastrowid
+
+    for order_id in order_ids:
+        cursor.execute("""
+            INSERT INTO bill_order_links
+            (bill_request_id, order_id)
+            VALUES (?, ?)
+        """, (bill_request_id, order_id))
 
     conn.commit()
     conn.close()
@@ -2958,8 +3325,8 @@ def bill_requested(bill_request_id):
             </div>
 
             <div class="order-actions">
-                <a href="/order/{{ bill[2] }}" class="order-action-btn">
-                    View Order
+                <a href="/orders/{{ bill[1] }}" class="order-action-btn">
+                    View Orders
                 </a>
 
                 {% if bill[7] in ["New", "Accepted"] %}
@@ -2978,7 +3345,7 @@ def bill_requested(bill_request_id):
         </div>
     </div>
 
-    {% if bill[7] != "Paid" %}
+    {% if bill[7] in ["New", "Accepted"] %}
     <script>
         setTimeout(function() {
             window.location.reload();
@@ -3002,7 +3369,7 @@ def cancel_bill_request(bill_request_id):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT order_id, status
+        SELECT table_number, status
         FROM bill_requests
         WHERE id = ?
     """, (bill_request_id,))
@@ -3013,7 +3380,7 @@ def cancel_bill_request(bill_request_id):
         conn.close()
         return "Bill request not found"
 
-    order_id = bill[0]
+    table_number = bill[0]
     status = bill[1]
 
     if status in ["New", "Accepted"]:
@@ -3023,10 +3390,15 @@ def cancel_bill_request(bill_request_id):
             WHERE id = ?
         """, (bill_request_id,))
 
+        cursor.execute("""
+            DELETE FROM bill_order_links
+            WHERE bill_request_id = ?
+        """, (bill_request_id,))
+
     conn.commit()
     conn.close()
 
-    return redirect(f"/order/{order_id}")
+    return redirect(f"/orders/{table_number}")
 
 @app.route("/reset_table/<int:table_number>", methods=["POST"])
 def reset_table(table_number):
@@ -3037,13 +3409,187 @@ def reset_table(table_number):
         UPDATE bill_requests
         SET status = 'Closed'
         WHERE table_number = ?
-          AND status IN ('Paid', 'Closed')
+        AND status = 'Paid'
     """, (table_number,))
 
     conn.commit()
     conn.close()
 
     return redirect("/bills")
+
+@app.route("/tables")
+def tables_dashboard():
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+
+    tables = []
+
+    for table_number in range(1, 13):
+        cursor.execute("""
+            SELECT id, status, total_amount
+            FROM bill_requests
+            WHERE table_number = ?
+              AND status IN ('New', 'Accepted', 'Paid')
+            ORDER BY id DESC
+            LIMIT 1
+        """, (table_number,))
+
+        bill = cursor.fetchone()
+
+        cursor.execute("""
+            SELECT COUNT(*)
+            FROM orders
+            WHERE table_number = ?
+              AND id NOT IN (
+                  SELECT bill_order_links.order_id
+                  FROM bill_order_links
+                  JOIN bill_requests
+                    ON bill_requests.id = bill_order_links.bill_request_id
+                  WHERE bill_requests.status = 'Closed'
+              )
+        """, (table_number,))
+
+        active_order_count = cursor.fetchone()[0] or 0
+
+        if bill:
+            if bill[1] == "Paid":
+                status = "Paid - Reset Needed"
+                action_url = "/bills"
+            elif bill[1] in ["New", "Accepted"]:
+                status = "Bill Requested"
+                action_url = f"/bill_requested/{bill[0]}"
+            else:
+                status = bill[1]
+                action_url = f"/orders/{table_number}"
+        elif active_order_count > 0:
+            status = "Ordering"
+            action_url = f"/orders/{table_number}"
+        else:
+            status = "Empty"
+            action_url = f"/table/{table_number}"
+
+        if status == "Empty":
+            display_status = "Available"
+            status_class = "table-available"
+            icon = "🍽️"
+            action_label = "Start Order"
+        elif status == "Ordering":
+            display_status = "Occupied"
+            status_class = "table-ordering"
+            icon = "🍽️"
+            action_label = "View Orders"
+        elif status == "Bill Requested":
+            display_status = "Bill Requested"
+            status_class = "table-bill"
+            icon = "🧾"
+            action_label = "View Bill"
+        elif status == "Paid - Reset Needed":
+            display_status = "Needs Cleaning"
+            status_class = "table-paid"
+            icon = "✓"
+            action_label = "Reset Table"
+        else:
+            display_status = status
+            status_class = "table-ordering"
+            icon = "🍽️"
+            action_label = "Open"
+
+        tables.append({
+            "number": table_number,
+            "status": status,
+            "display_status": display_status,
+            "status_class": status_class,
+            "icon": icon,
+            "orders": active_order_count,
+            "bill": bill,
+            "action_url": action_url,
+            "action_label": action_label
+        })
+
+    conn.close()
+
+    html = """
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{ style|safe }}
+
+    <div class="sales-page">
+        <div class="sales-topbar">
+            <div>
+                <h1>Tables Dashboard</h1>
+                <p>Live table status for staff.</p>
+            </div>
+
+            <div class="live-pill">
+                ● Live
+            </div>
+        </div>
+
+        <div class="staff-table-grid">
+            {% for table in tables %}
+            <div class="staff-table-card {{ table.status_class }}">
+
+                <div class="table-status-row">
+                    <div>
+                        <p>Table</p>
+                        <h2>{{ table.number }}</h2>
+                    </div>
+
+                    <div class="table-icon">
+                        {{ table.icon }}
+                    </div>
+                </div>
+
+                <p class="table-status-text">
+                    {{ table.display_status }}
+                </p>
+
+                <p>{{ table.orders }} active orders</p>
+
+                {% if table.bill %}
+                <p><strong>Bill:</strong> HK${{ table.bill[2] }}</p>
+                {% else %}
+                <p>No active bill</p>
+                {% endif %}
+
+                <br>
+
+                {% if table.status == "Paid - Reset Needed" %}
+                <form action="/reset_table/{{ table.number }}" method="POST">
+                    <button class="kitchen-action served-btn" type="submit">
+                        {{ table.action_label }}
+                    </button>
+                </form>
+                {% else %}
+                <a href="{{ table.action_url }}" class="add-btn">
+                    {{ table.action_label }}
+                </a>
+                {% endif %}
+
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="nav">
+            <a href="/">Admin</a>
+            <a href="/kitchen">Kitchen</a>
+            <a href="/bills">Bills</a>
+            <a href="/sales">Sales</a>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(function() {
+            window.location.reload();
+        }, 5000);
+    </script>
+    """
+
+    return render_template_string(
+        html,
+        tables=tables,
+        style=STYLE
+    )
 
 if __name__ == "__main__":
     init_db()
